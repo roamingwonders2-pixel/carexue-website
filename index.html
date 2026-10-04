@@ -244,6 +244,20 @@
   /* long email/address lines wrap on phones instead of widening the page */
   .contact-card, .contact-grid > *{ min-width:0;}
   .contact-row-value{ overflow-wrap:anywhere;}
+  /* Hero on phones: photo band on top, compact headline, buttons on the first screen */
+  @media (max-width:600px){
+    .hero{ display:block; min-height:0; background:var(--ink);}
+    .hero::before{ content:""; display:block; height:220px;
+      background:linear-gradient(180deg, rgba(15,27,34,.05) 0%, rgba(15,27,34,.35) 55%, var(--ink) 100%), url('images/carm-or.jpg') center 45%/cover no-repeat;}
+    .hero-glow{ display:none;}
+    .hero-inner{ padding:4px 20px 44px; margin-top:-34px;}
+    .hero-eyebrow{ font-size:11.5px; padding:6px 12px; margin-bottom:16px; letter-spacing:.02em;}
+    .hero h1{ font-size:33px; line-height:1.13;}
+    .hero p{ font-size:16px; margin-top:16px;}
+    .hero-actions{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:26px;}
+    .hero-actions .btn{ justify-content:center; text-align:center; padding-left:10px; padding-right:10px;}
+    .hero-strip{ flex-direction:column; gap:12px; margin-top:34px; padding-top:22px;}
+  }
 </style>
 </head>
 <body>
