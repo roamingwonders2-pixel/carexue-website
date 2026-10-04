@@ -11,7 +11,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.css">
 <style>
   :root{
     --ink:#081117; --ink-2:#0E1B23; --ink-3:#152730;
@@ -31,20 +30,6 @@
   .serif{ font-family:var(--serif); font-weight:400;}
   .line-mask{ display:block; overflow:hidden; padding-bottom:.08em;}
   .line-mask > span{ display:inline-block; will-change:transform;}
-
-  /* ---------- Preloader ---------- */
-  .loader{ position:fixed; inset:0; z-index:100; background:var(--ink); display:grid; place-items:center;}
-  .loader-inner{ display:flex; flex-direction:column; align-items:center; gap:22px;}
-  .loader img{ width:74px; height:74px; border-radius:18px; opacity:0; transform:scale(.8);}
-  .loader-name{ font-family:var(--serif); font-size:28px; letter-spacing:.42em; padding-left:.42em; opacity:0;}
-  .loader-bar{ width:160px; height:1px; background:rgba(255,255,255,.14); overflow:hidden;}
-  .loader-bar i{ display:block; height:100%; width:100%; background:var(--copper-2); transform:scaleX(0); transform-origin:left;}
-  .curtain{ position:fixed; inset:0; z-index:99; background:var(--copper); transform:scaleY(0); transform-origin:bottom; pointer-events:none;}
-
-  /* ---------- Cursor ---------- */
-  .cursor{ position:fixed; top:0; left:0; z-index:90; width:10px; height:10px; margin:-5px 0 0 -5px; border-radius:50%; background:var(--copper-2); pointer-events:none; mix-blend-mode:difference; transition:width .3s, height .3s, margin .3s, background .3s;}
-  .cursor.big{ width:64px; height:64px; margin:-32px 0 0 -32px; background:#fff;}
-  @media (hover:none){ .cursor{ display:none;} }
 
   /* ---------- Nav ---------- */
   .nav{ position:fixed; top:0; left:0; right:0; z-index:50; transition:background .4s, backdrop-filter .4s, border-color .4s; border-bottom:1px solid transparent;}
@@ -76,7 +61,6 @@
       radial-gradient(70% 60% at 85% 20%, rgba(232,181,126,.18), transparent 60%),
       linear-gradient(90deg, rgba(8,17,23,.95) 0%, rgba(8,17,23,.7) 45%, rgba(8,17,23,.15) 100%),
       linear-gradient(0deg, var(--ink) 0%, transparent 30%);}
-  .hero-sweep{ position:absolute; inset:-20% -40%; z-index:1; background:linear-gradient(105deg, transparent 40%, rgba(255,255,255,.07) 50%, transparent 60%); transform:translateX(-60%); pointer-events:none;}
   .hero-content{ position:relative; z-index:2; height:100%; display:flex; flex-direction:column; justify-content:flex-end; padding-bottom:13vh;}
   .hero h1{ font-family:var(--serif); font-weight:400; font-size:clamp(48px, 8.2vw, 132px); line-height:.92; letter-spacing:-.015em; max-width:1100px; margin-top:28px;}
   .hero h1 em{ color:var(--copper-2);}
@@ -99,7 +83,6 @@
   /* ---------- About ---------- */
   .about{ padding:180px 0 140px;}
   .about-statement{ font-family:var(--serif); font-size:clamp(34px, 4.6vw, 72px); line-height:1.12; letter-spacing:-.01em; max-width:1180px; margin-top:40px;}
-  .about-statement .w{ opacity:.14; transition:none;}
   .about-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); margin-top:110px;}
   .about-cell{ background:var(--ink); padding:44px 38px 50px;}
   .about-cell h3{ font-family:var(--serif); font-weight:400; font-size:34px; margin:18px 0 12px; color:#fff;}
@@ -108,23 +91,22 @@
 
   /* ---------- Horizontal equipment ---------- */
   .equip{ position:relative; background:var(--paper); color:var(--ink);}
-  .equip-pin{ height:100svh; display:flex; flex-direction:column; justify-content:center; overflow:hidden;}
+  .equip-inner{ padding:150px 0 160px;}
   .equip-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:30px; margin-bottom:48px; flex-wrap:wrap;}
   .equip-head h2{ font-family:var(--serif); font-weight:400; font-size:clamp(40px, 5.4vw, 84px); line-height:.95; letter-spacing:-.015em; max-width:760px;}
   .equip-head .eyebrow{ color:var(--copper);}
   .equip-head p{ max-width:380px; color:var(--muted); line-height:1.7;}
-  .equip-track{ display:flex; gap:28px; padding-left:max(24px, calc((100vw - 1320px)/2)); will-change:transform;}
-  .equip-card{ position:relative; flex:0 0 clamp(280px, 30vw, 440px); height:min(56vh, 520px); border-radius:22px; overflow:hidden; background:#ddd;}
-  .equip-card img{ position:absolute; inset:-8% -8%; width:116%; height:116%; object-fit:cover;}
+  .equip-track{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .equip-card{ position:relative; height:400px; border-radius:22px; overflow:hidden; background:#ddd;}
+  .equip-card img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform 1.2s cubic-bezier(.2,.7,.2,1);}
+  .equip-card:hover img{ transform:scale(1.05);}
   .equip-card::after{ content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(8,17,23,.88), transparent 55%);}
   .equip-card .meta{ position:absolute; z-index:1; left:26px; right:26px; bottom:24px; color:#fff;}
   .equip-card small{ font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:var(--copper-2);}
   .equip-card h3{ font-family:var(--serif); font-weight:400; font-size:34px; line-height:1; margin-top:10px;}
   .equip-card .idx{ position:absolute; z-index:1; top:22px; left:26px; font-size:12px; letter-spacing:.2em; color:rgba(255,255,255,.75);}
-  .equip-end{ flex:0 0 clamp(260px, 26vw, 380px); display:flex; flex-direction:column; justify-content:center; gap:24px; padding-right:60px;}
-  .equip-end p{ font-family:var(--serif); font-size:34px; line-height:1.1;}
-  .equip-progress{ height:2px; background:var(--line-dark); margin-top:44px; position:relative;}
-  .equip-progress i{ position:absolute; inset:0; background:var(--copper); transform:scaleX(0); transform-origin:left;}
+  .equip-more{ display:flex; align-items:center; justify-content:center; gap:28px; margin-top:64px; flex-wrap:wrap;}
+  .equip-more p{ font-size:34px;}
 
   /* ---------- Process ---------- */
   .process{ padding:170px 0;}
@@ -135,14 +117,6 @@
   .step-dot{ position:relative; z-index:1; width:58px; height:58px; border-radius:50%; border:1px solid var(--line); background:var(--ink); display:grid; place-items:center; font-size:13px; letter-spacing:.1em; color:var(--copper-2);}
   .step h3{ font-family:var(--serif); font-weight:400; font-size:36px; margin:30px 0 12px;}
   .step p{ color:var(--steel); line-height:1.75; font-size:15px; max-width:280px;}
-
-  /* ---------- Showcase image ---------- */
-  .showcase{ position:relative; height:120vh; overflow:hidden;}
-  .showcase-frame{ position:absolute; inset:0; clip-path:inset(18% 22% 18% 22% round 28px); will-change:clip-path;}
-  .showcase-frame img{ width:100%; height:100%; object-fit:cover; transform:scale(1.25);}
-  .showcase-frame::after{ content:""; position:absolute; inset:0; background:radial-gradient(ellipse at center, rgba(8,17,23,.65) 0%, rgba(8,17,23,.35) 60%, rgba(8,17,23,.2) 100%);}
-  .showcase-caption{ position:absolute; z-index:2; left:50%; top:50%; transform:translate(-50%,-50%); text-align:center; width:min(900px, 90vw);}
-  .showcase-caption h2{ font-family:var(--serif); font-weight:400; font-size:clamp(40px, 6vw, 96px); line-height:.95; text-shadow:0 10px 40px rgba(0,0,0,.45);}
 
   /* ---------- MedTime ---------- */
   .medtime{ padding:170px 0; background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%); position:relative; overflow:hidden;}
@@ -215,12 +189,13 @@
   @media (max-width:980px){
     .nav-links, .nav .btn{ display:none;} .menu-btn{ display:inline-block;}
     .about-grid, .steps{ grid-template-columns:1fr;} .steps-line{ display:none;}
+    .equip-track{ grid-template-columns:1fr 1fr;} .equip-card{ height:340px;}
     .medtime-grid, .contact-grid{ grid-template-columns:1fr;}
     .comm-grid{ grid-template-columns:1fr 1fr; grid-template-rows:260px 260px 260px;} .comm-tile:first-child{ grid-column:span 2; grid-row:auto;}
     .ph-alarm{ left:-10px;} .ph-alarm2{ right:-10px;}
   }
   @media (max-width:560px){
-    .features{ grid-template-columns:1fr;} .comm-grid{ grid-template-columns:1fr; grid-template-rows:none;} .comm-tile{ height:260px;} .comm-tile:first-child{ grid-column:auto;}
+    .features{ grid-template-columns:1fr;} .equip-track{ grid-template-columns:1fr;} .comm-grid{ grid-template-columns:1fr; grid-template-rows:none;} .comm-tile{ height:260px;} .comm-tile:first-child{ grid-column:auto;}
     .contact-list div{ grid-template-columns:1fr; gap:4px;}
   }
   .mobile-menu{ position:fixed; inset:0; z-index:60; background:var(--ink); display:flex; flex-direction:column; justify-content:center; padding:0 32px; gap:18px; transform:translateY(-100%); transition:transform .6s cubic-bezier(.7,0,.2,1);}
@@ -228,23 +203,11 @@
   .mobile-menu a{ font-family:var(--serif); font-size:46px;}
   .mobile-menu button{ position:absolute; top:24px; right:24px;}
   @media (prefers-reduced-motion: reduce){
-    .loader, .curtain, .cursor{ display:none !important;}
-    .about-statement .w{ opacity:1;}
     .scroll-cue span::after{ animation:none;}
   }
 </style>
 </head>
 <body>
-
-<div class="loader" aria-hidden="true">
-  <div class="loader-inner">
-    <img src="icon-512.png" alt="">
-    <div class="loader-name">CAREXUE</div>
-    <div class="loader-bar"><i></i></div>
-  </div>
-</div>
-<div class="curtain" aria-hidden="true"></div>
-<div class="cursor" aria-hidden="true"></div>
 
 <header class="nav">
   <div class="wrap nav-inner">
@@ -252,7 +215,7 @@
     <nav class="nav-links">
       <a href="#about">About</a><a href="#equipment">Equipment</a><a href="#process">Process</a><a href="#medtime">MedTime</a><a href="#community">Community</a>
     </nav>
-    <a href="#contact" class="btn btn-copper magnetic">Request a quote</a>
+    <a href="#contact" class="btn btn-copper">Request a quote</a>
     <button class="menu-btn" type="button">Menu</button>
   </div>
 </header>
@@ -265,7 +228,6 @@
   <!-- Hero -->
   <section class="hero">
     <div class="hero-media"><img src="images/carm-or.jpg" alt="C-arm imaging system and operating table in an operating room"></div>
-    <div class="hero-sweep"></div>
     <div class="wrap hero-content">
       <div class="eyebrow reveal-up">Medical equipment · Installation · Service</div>
       <h1 class="split-lines">
@@ -276,8 +238,8 @@
       <div class="hero-sub">
         <p class="reveal-up">Carexue Inc sources, installs and services diagnostic imaging and hospital equipment — from mobile X-ray and ultrasound to fully equipped operating rooms.</p>
         <div class="hero-actions reveal-up">
-          <a href="#contact" class="btn btn-copper magnetic">Request a quote <span class="arrow">→</span></a>
-          <a href="#equipment" class="btn btn-line magnetic">View equipment</a>
+          <a href="#contact" class="btn btn-copper">Request a quote <span class="arrow">→</span></a>
+          <a href="#equipment" class="btn btn-line">View equipment</a>
         </div>
       </div>
     </div>
@@ -304,7 +266,7 @@
   <section class="about" id="about">
     <div class="wrap">
       <div class="eyebrow reveal-up">About Carexue</div>
-      <p class="about-statement words">Equipment is only useful if it keeps working. We source the right systems for each facility, install them with trained technicians, and keep them serviced long after delivery — so clinicians can focus on patients, not machines.</p>
+      <p class="about-statement reveal-up">Equipment is only useful if it keeps working. We source the right systems for each facility, install them with trained technicians, and keep them serviced long after delivery — so clinicians can focus on patients, not machines.</p>
       <div class="about-grid">
         <div class="about-cell reveal-up"><div class="num">01 — IMAGING</div><h3>Diagnostic imaging</h3><p>Ultrasound, mobile X-ray, C-arm fluoroscopy and digital radiography panels.</p></div>
         <div class="about-cell reveal-up"><div class="num">02 — SURGICAL</div><h3>Surgical &amp; OR</h3><p>Operating tables, imaging integration and full theatre fit-out.</p></div>
@@ -315,7 +277,7 @@
 
   <!-- Equipment: horizontal scroll -->
   <section class="equip" id="equipment">
-    <div class="equip-pin">
+    <div class="equip-inner">
       <div class="wrap equip-head">
         <div>
           <div class="eyebrow">Equipment</div>
@@ -323,16 +285,15 @@
         </div>
         <p>New and refurbished equipment, sourced to each facility's requirements. Exact availability and specifications are confirmed per order.</p>
       </div>
-      <div class="equip-track">
+      <div class="wrap equip-track">
         <article class="equip-card"><img src="images/carm-or.jpg" alt="C-arm and operating room"><span class="idx">01</span><div class="meta"><small>Surgical &amp; OR</small><h3>C-Arm &amp; Operating Rooms</h3></div></article>
         <article class="equip-card"><img src="images/ultrasound-system.jpg" alt="Ultrasound console"><span class="idx">02</span><div class="meta"><small>Diagnostic imaging</small><h3>Ultrasound Consoles</h3></div></article>
         <article class="equip-card"><img src="images/dr-flat-panel.jpg" alt="Digital radiography flat panel kit"><span class="idx">03</span><div class="meta"><small>Diagnostic imaging</small><h3>Digital Radiography</h3></div></article>
         <article class="equip-card"><img src="images/ultrasound-probes.jpg" alt="Ultrasound transducers"><span class="idx">04</span><div class="meta"><small>Diagnostic imaging</small><h3>Ultrasound Transducers</h3></div></article>
         <article class="equip-card"><img src="images/imaging-workstation.jpg" alt="Imaging workstation with detector"><span class="idx">05</span><div class="meta"><small>Diagnostic imaging</small><h3>Imaging Workstations</h3></div></article>
         <article class="equip-card"><img src="images/installation.jpg" alt="Technicians installing equipment"><span class="idx">06</span><div class="meta"><small>Service</small><h3>On-Site Installation</h3></div></article>
-        <div class="equip-end"><p class="serif">Looking for something specific?</p><a href="#contact" class="btn btn-copper magnetic" style="align-self:flex-start">Ask us <span class="arrow">→</span></a></div>
       </div>
-      <div class="wrap"><div class="equip-progress"><i></i></div></div>
+      <div class="wrap equip-more reveal-up"><p class="serif">Looking for something specific?</p><a href="#contact" class="btn btn-copper">Ask us <span class="arrow">→</span></a></div>
     </div>
   </section>
 
@@ -352,12 +313,6 @@
         <div class="step reveal-up"><div class="step-dot">04</div><h3>Service</h3><p>Maintenance and support continue for as long as the equipment is in use.</p></div>
       </div>
     </div>
-  </section>
-
-  <!-- Showcase: image opens up as you scroll -->
-  <section class="showcase" aria-label="On-site installation">
-    <div class="showcase-frame"><img src="images/installation.jpg" alt="Carexue technicians installing imaging equipment on site"></div>
-    <div class="showcase-caption"><h2>Our job doesn't end<br>at delivery.</h2></div>
   </section>
 
   <!-- MedTime -->
@@ -393,8 +348,8 @@
             <div class="ph-card"><h4>Next appointment</h4><div class="due">Dr. Rahman · Tuesday, 10:00 AM</div></div>
           </div>
         </div>
-        <div class="ph-alarm float-a"><b>Reminder</b>Time for your 8:00 AM medicine</div>
-        <div class="ph-alarm ph-alarm2 float-b"><b>Caregiver</b>Mum took her morning medicine ✓</div>
+        <div class="ph-alarm"><b>Reminder</b>Time for your 8:00 AM medicine</div>
+        <div class="ph-alarm ph-alarm2"><b>Caregiver</b>Mum took her morning medicine ✓</div>
       </div>
     </div>
   </section>
@@ -420,7 +375,7 @@
       <div class="eyebrow reveal-up" style="justify-content:center">Get in touch</div>
       <h2 class="split-lines" style="margin-top:30px"><span class="line-mask"><span>Let's equip</span></span><span class="line-mask"><span>your <em>facility.</em></span></span></h2>
       <p class="reveal-up">Tell us what you need — we'll help you find the right equipment and the right plan.</p>
-      <a href="#contact" class="btn btn-copper magnetic reveal-up">Request a quote <span class="arrow">→</span></a>
+      <a href="#contact" class="btn btn-copper reveal-up">Request a quote <span class="arrow">→</span></a>
     </div>
   </section>
 
@@ -437,7 +392,7 @@
         <div class="field"><input id="f-name" required placeholder=" "><label for="f-name">Your name</label></div>
         <div class="field"><input id="f-email" type="email" required placeholder=" "><label for="f-email">Email</label></div>
         <div class="field"><textarea id="f-message" required placeholder=" "></textarea><label for="f-message">What equipment or service do you need?</label></div>
-        <button class="btn btn-copper magnetic" type="submit" style="justify-self:start; margin-top:10px">Send inquiry <span class="arrow">→</span></button>
+        <button class="btn btn-copper" type="submit" style="justify-self:start; margin-top:10px">Send inquiry <span class="arrow">→</span></button>
       </form>
     </div>
   </section>
@@ -455,7 +410,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
 <script>
 (function () {
   // Contact form: opens the visitor's email app, like the current site.
@@ -472,150 +426,43 @@
   var menu = document.querySelector('.mobile-menu');
   document.querySelectorAll('.menu-btn').forEach(function (b) { b.addEventListener('click', function () { menu.classList.toggle('open'); }); });
   menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { menu.classList.remove('open'); }); });
-
-  // Words of the about statement, so they can light up one by one.
-  document.querySelectorAll('.words').forEach(function (el) {
-    el.innerHTML = el.textContent.trim().split(/\s+/).map(function (w) { return '<span class="w">' + w + '</span>'; }).join(' ');
-  });
-
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!window.gsap || reduce) {
-    document.querySelector('.loader') && document.querySelector('.loader').remove();
-    return;
-  }
+  if (!window.gsap || reduce) return;
   gsap.registerPlugin(ScrollTrigger);
-
-  // Smooth scrolling, driven by GSAP's clock so ScrollTrigger stays in step.
-  var lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
-  gsap.ticker.lagSmoothing(0);
-  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-    a.addEventListener('click', function (e) {
-      var id = a.getAttribute('href');
-      if (id.length > 1 && document.querySelector(id)) { e.preventDefault(); lenis.scrollTo(id, { offset: -10, duration: 1.6 }); }
-    });
-  });
 
   // Nav background once the page moves.
   ScrollTrigger.create({ start: 80, onUpdate: function (s) { document.querySelector('.nav').classList.toggle('scrolled', s.scroll() > 80); } });
 
-  // ---- Intro: logo, bar, copper curtain, then the hero builds itself ----
-  gsap.set('.hero h1 .line-mask > span', { yPercent: 110 });
-  gsap.set('.hero .reveal-up', { y: 30, opacity: 0 });
-  var intro = gsap.timeline({ defaults: { ease: 'power3.out' } });
-  intro
-    .to('.loader img', { opacity: 1, scale: 1, duration: .7 })
-    .to('.loader-name', { opacity: 1, letterSpacing: '.3em', duration: .8 }, '<.1')
-    .to('.loader-bar i', { scaleX: 1, duration: 1, ease: 'power2.inOut' }, '<')
-    .to('.curtain', { scaleY: 1, duration: .6, ease: 'power4.inOut' })
-    .set('.loader', { display: 'none' })
-    .set('.curtain', { transformOrigin: 'top' })
-    .to('.curtain', { scaleY: 0, duration: .7, ease: 'power4.inOut' })
-    .to('.hero-media img', { scale: 1.04, duration: 2.6, ease: 'power2.out' }, '<')
-    .to('.hero h1 .line-mask > span', { yPercent: 0, duration: 1.2, stagger: .12, ease: 'power4.out' }, '<.15')
-    .to('.hero .reveal-up', { y: 0, opacity: 1, duration: 1, stagger: .1 }, '<.4')
-    .to('.hero-sweep', { xPercent: 60, duration: 2.2, ease: 'power2.inOut' }, '<');
+  // Hero: headline rises in once, photo settles from a slight zoom.
+  gsap.from('.hero h1 .line-mask > span', { yPercent: 110, duration: 1.2, stagger: .12, ease: 'power4.out', delay: .15 });
+  gsap.from('.hero .reveal-up', { y: 24, opacity: 0, duration: 1, stagger: .1, ease: 'power3.out', delay: .5 });
+  gsap.fromTo('.hero-media img', { scale: 1.12 }, { scale: 1.02, duration: 2.4, ease: 'power2.out' });
 
-  // Hero image drifts and dims as you scroll away.
-  gsap.to('.hero-media img', { yPercent: 12, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-  gsap.to('.hero-content', { yPercent: -18, opacity: 0, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 30%', scrub: true } });
-
-  // ---- Marquee: endless, and it speeds up / reverses with scrolling ----
+  // A slow, steady band of what we supply.
   var track = document.querySelector('.marquee-track');
   var group = track.querySelector('.marquee-group');
   track.appendChild(group.cloneNode(true)); track.appendChild(group.cloneNode(true));
-  var marquee = gsap.to(track, { xPercent: -33.333, duration: 28, ease: 'none', repeat: -1 });
-  ScrollTrigger.create({ onUpdate: function (s) {
-    var v = s.getVelocity() / 300;
-    gsap.to(marquee, { timeScale: (s.direction === 1 ? 1 : -1) * Math.min(4, Math.max(1, Math.abs(v))), duration: .4, overwrite: true });
-  } });
+  gsap.to(track, { xPercent: -33.333, duration: 60, ease: 'none', repeat: -1 });
 
-  // ---- Generic reveals ----
+  // Sections fade up softly as they come into view (once).
   gsap.utils.toArray('.reveal-up').forEach(function (el) {
     if (el.closest('.hero')) return;
-    gsap.from(el, { y: 50, opacity: 0, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+    gsap.from(el, { y: 30, opacity: 0, duration: 1, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
   });
   gsap.utils.toArray('.split-lines').forEach(function (h) {
     if (h.closest('.hero')) return;
-    gsap.from(h.querySelectorAll('.line-mask > span'), { yPercent: 110, duration: 1.2, stagger: .1, ease: 'power4.out', scrollTrigger: { trigger: h, start: 'top 85%' } });
+    gsap.from(h.querySelectorAll('.line-mask > span'), { yPercent: 100, duration: 1.1, stagger: .08, ease: 'power3.out', scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
+  });
+  gsap.utils.toArray('.equip-card, .comm-tile').forEach(function (el) {
+    gsap.from(el, { y: 30, opacity: 0, duration: 1, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 92%', once: true } });
   });
 
-  // About statement: words light up as you read down.
-  gsap.to('.about-statement .w', { opacity: 1, stagger: .05, ease: 'none',
-    scrollTrigger: { trigger: '.about-statement', start: 'top 80%', end: 'bottom 45%', scrub: true } });
+  // Process line draws once.
+  gsap.to('.steps-line i', { scaleX: 1, duration: 1.6, ease: 'power2.inOut', scrollTrigger: { trigger: '.steps', start: 'top 80%', once: true } });
 
-  // ---- Equipment: vertical scroll moves the gallery sideways ----
-  var mm = gsap.matchMedia();
-  mm.add('(min-width: 768px)', function () {
-    var eTrack = document.querySelector('.equip-track');
-    var distance = function () { return eTrack.scrollWidth - window.innerWidth + 40; };
-    var tween = gsap.to(eTrack, { x: function () { return -distance(); }, ease: 'none',
-      scrollTrigger: { trigger: '.equip', pin: '.equip-pin', start: 'top top', end: function () { return '+=' + distance(); }, scrub: 1, invalidateOnRefresh: true } });
-    gsap.to('.equip-progress i', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: '.equip', start: 'top top', end: function () { return '+=' + distance(); }, scrub: true } });
-    // each photo slides inside its frame for depth
-    gsap.utils.toArray('.equip-card img').forEach(function (img) {
-      gsap.fromTo(img, { xPercent: -6 }, { xPercent: 6, ease: 'none', scrollTrigger: { trigger: img.parentNode, containerAnimation: tween, start: 'left right', end: 'right left', scrub: true } });
-    });
-  });
-  mm.add('(max-width: 767px)', function () {
-    var eTrack = document.querySelector('.equip-track');
-    eTrack.style.overflowX = 'auto'; eTrack.style.paddingRight = '24px'; eTrack.style.scrollSnapType = 'x mandatory';
-  });
-
-  // ---- Process line draws itself, dots light up ----
-  gsap.to('.steps-line i', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: '.steps', start: 'top 75%', end: 'bottom 55%', scrub: true } });
-  gsap.utils.toArray('.step-dot').forEach(function (d) {
-    gsap.to(d, { backgroundColor: '#C9884A', color: '#081117', borderColor: '#C9884A', duration: .4, scrollTrigger: { trigger: d, start: 'top 62%', toggleActions: 'play none none reverse' } });
-  });
-
-  // ---- Showcase: framed photo opens to full screen ----
-  gsap.to('.showcase-frame', { clipPath: 'inset(0% 0% 0% 0% round 0px)', ease: 'none',
-    scrollTrigger: { trigger: '.showcase', start: 'top 80%', end: 'center center', scrub: true } });
-  gsap.to('.showcase-frame img', { scale: 1, ease: 'none', scrollTrigger: { trigger: '.showcase', start: 'top bottom', end: 'bottom top', scrub: true } });
-  gsap.from('.showcase-caption h2', { y: 80, opacity: 0, scrollTrigger: { trigger: '.showcase', start: 'top 30%', end: 'center center', scrub: true } });
-
-  // ---- MedTime phone: rises in, progress ring fills, notifications float ----
-  gsap.from('.phone', { y: 120, rotate: -6, opacity: 0, duration: 1.4, ease: 'power3.out', scrollTrigger: { trigger: '.medtime', start: 'top 70%' } });
-  gsap.to('.ring-fill', { strokeDashoffset: 163.4 * (1 - 2 / 3), duration: 1.6, ease: 'power2.out', scrollTrigger: { trigger: '.phone', start: 'top 70%' } });
-  gsap.from('.ph-alarm', { x: function (i) { return i ? 60 : -60; }, opacity: 0, duration: 1, stagger: .35, delay: .6, ease: 'back.out(1.6)', scrollTrigger: { trigger: '.phone', start: 'top 70%' } });
-  gsap.to('.float-a', { y: -14, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
-  gsap.to('.float-b', { y: 12, duration: 3.1, ease: 'sine.inOut', yoyo: true, repeat: -1 });
-  gsap.to('.phone', { yPercent: -8, ease: 'none', scrollTrigger: { trigger: '.medtime', start: 'top bottom', end: 'bottom top', scrub: true } });
-
-  // ---- Community photos wipe in ----
-  gsap.utils.toArray('.clip-reveal').forEach(function (f, i) {
-    gsap.fromTo(f, { clipPath: 'inset(100% 0 0 0 round 20px)' }, { clipPath: 'inset(0% 0 0 0 round 20px)', duration: 1.3, delay: (i % 3) * .12, ease: 'power4.inOut', scrollTrigger: { trigger: f, start: 'top 85%' } });
-    gsap.fromTo(f.querySelector('img'), { scale: 1.3 }, { scale: 1, duration: 1.6, ease: 'power3.out', scrollTrigger: { trigger: f, start: 'top 85%' } });
-  });
-
-  // Giant footer word slides in.
-  gsap.from('.giant', { yPercent: 40, opacity: 0, ease: 'none', scrollTrigger: { trigger: 'footer', start: 'top bottom', end: 'bottom bottom', scrub: true } });
-
-  // ---- Cursor + magnetic buttons (desktop only) ----
-  if (window.matchMedia('(hover: hover)').matches) {
-    var cursor = document.querySelector('.cursor');
-    var cx = gsap.quickTo(cursor, 'x', { duration: .25, ease: 'power3' });
-    var cy = gsap.quickTo(cursor, 'y', { duration: .25, ease: 'power3' });
-    window.addEventListener('mousemove', function (e) { cx(e.clientX); cy(e.clientY); });
-    document.querySelectorAll('a, button, .equip-card, .comm-tile').forEach(function (el) {
-      el.addEventListener('mouseenter', function () { cursor.classList.add('big'); });
-      el.addEventListener('mouseleave', function () { cursor.classList.remove('big'); });
-    });
-    document.querySelectorAll('.magnetic').forEach(function (el) {
-      var mx = gsap.quickTo(el, 'x', { duration: .5, ease: 'elastic.out(1, .4)' });
-      var my = gsap.quickTo(el, 'y', { duration: .5, ease: 'elastic.out(1, .4)' });
-      el.addEventListener('mousemove', function (e) {
-        var r = el.getBoundingClientRect();
-        mx((e.clientX - r.left - r.width / 2) * .35); my((e.clientY - r.top - r.height / 2) * .35);
-      });
-      el.addEventListener('mouseleave', function () { mx(0); my(0); });
-    });
-  } else {
-    document.querySelector('.cursor').style.display = 'none';
-  }
-
-  window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+  // MedTime: the phone fades up and its progress ring fills once.
+  gsap.from('.phone, .ph-alarm', { y: 40, opacity: 0, duration: 1.1, stagger: .15, ease: 'power3.out', scrollTrigger: { trigger: '.medtime-grid', start: 'top 75%', once: true } });
+  gsap.to('.ring-fill', { strokeDashoffset: 163.4 * (1 - 2 / 3), duration: 1.4, ease: 'power2.out', scrollTrigger: { trigger: '.phone', start: 'top 80%', once: true } });
 })();
 </script>
 </body>
