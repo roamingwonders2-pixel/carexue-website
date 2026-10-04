@@ -204,6 +204,46 @@
   .community-tile figcaption{ padding:14px 16px 16px; font-size:14px; line-height:1.5; color:var(--steel);}
   @media (max-width:900px){ .equip-more{ grid-template-columns:repeat(2,1fr);} .community-grid{ grid-template-columns:repeat(2,1fr);} }
   @media (max-width:560px){ .equip-more{ grid-template-columns:1fr;} .community-grid{ grid-template-columns:1fr;} }
+
+  /* MedTime: three phones */
+  .mt{ background:var(--paper); padding:110px 0 100px; overflow:hidden;}
+  .mt-center{ text-align:center;}
+  .mt-center .section-label{ justify-content:center;}
+  .mt-center .section-title{ max-width:820px; margin-inline:auto;}
+  .mt-lead{ color:var(--steel); font-size:17px; line-height:1.7; max-width:660px; margin:18px auto 0;}
+  .mt-badge{ display:inline-block; margin-top:22px; padding:8px 16px; border-radius:999px; background:var(--copper-soft); color:#7A4A12; font-size:13px; font-weight:500;}
+  .mt-stage{ position:relative; display:flex; justify-content:center; align-items:flex-end; margin-top:64px;}
+  .mt-stage::before{ content:""; position:absolute; left:50%; top:50%; width:760px; max-width:100%; height:440px; transform:translate(-50%,-50%); background:radial-gradient(ellipse, rgba(224,168,104,.38), transparent 65%); pointer-events:none;}
+  .mt-phone{ position:relative; margin:0; width:250px; text-align:center;}
+  .mt-phone img{ width:100%; border-radius:40px; padding:9px; background:#121417; box-shadow:0 40px 70px -30px rgba(15,27,34,.55), inset 0 0 0 1.5px #2b2f35;}
+  .mt-phone figcaption{ margin-top:22px; font-size:13.5px; color:var(--steel);}
+  .mt-left{ transform:translate(40px, 10px) rotate(-7deg); z-index:1;}
+  .mt-left figcaption, .mt-right figcaption{ transform:rotate(0);}
+  .mt-mid{ width:290px; z-index:2;}
+  .mt-right{ transform:translate(-40px, 10px) rotate(7deg); z-index:1;}
+  .mt-feat{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:64px;}
+  .mt-feat div{ background:var(--surface); padding:28px 24px 32px; text-align:left;}
+  .mt-feat i{ display:block; width:18px; height:2px; background:var(--copper); margin-bottom:18px;}
+  .mt-feat h3{ font-size:19px; margin-bottom:8px;}
+  .mt-feat p{ color:var(--steel); font-size:14.5px; line-height:1.6;}
+  .mt-sms{ margin-top:36px; padding:22px 24px; border-radius:12px; border:1px solid var(--line); background:var(--surface); color:var(--steel); font-size:14px; line-height:1.75;}
+  .mt-sms p + p{ margin-top:8px;}
+  .mt-sms strong{ color:var(--ink); font-weight:600;}
+  .mt-sms a{ color:var(--copper);}
+  @media (max-width:900px){
+    .mt-phone{ width:190px;} .mt-mid{ width:230px;}
+    .mt-left{ transform:translate(30px, 8px) rotate(-6deg);} .mt-right{ transform:translate(-30px, 8px) rotate(6deg);}
+    .mt-feat{ grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:600px){
+    .mt{ padding:80px 0 70px;}
+    .mt-left, .mt-right{ display:none;}
+    .mt-mid{ width:250px;}
+    .mt-feat{ grid-template-columns:1fr;}
+  }
+  /* long email/address lines wrap on phones instead of widening the page */
+  .contact-card, .contact-grid > *{ min-width:0;}
+  .contact-row-value{ overflow-wrap:anywhere;}
 </style>
 </head>
 <body>
@@ -376,38 +416,27 @@
   </div>
 </section>
 
-<section class="capabilities" id="medtime">
-  <div class="wrap">
+<section class="mt" id="medtime">
+  <div class="wrap mt-center">
     <div class="section-label">MedTime App</div>
-    <h2 class="section-title">MedTime: medication reminders for patients and the families who care for them</h2>
-    <div class="about-text" style="max-width:760px;">
-      <p>MedTime is a mobile app from Carexue Inc for Android and iPhone. Patients add their medicines and schedule; the app reminds them when each dose is due and keeps a simple record of what was taken. Family caregivers the patient invites can see how they are doing and are alerted if a dose is missed.</p>
+    <h2 class="section-title">Medication reminders for patients and the families who care for them</h2>
+    <p class="mt-lead">MedTime is a mobile app from Carexue Inc. It reminds patients when each dose is due, keeps a simple record of what was taken, and lets the family caregivers they invite know if a dose is missed.</p>
+    <span class="mt-badge">Android and iPhone · from Carexue Inc</span>
+  </div>
+  <div class="mt-stage">
+    <figure class="mt-phone mt-left"><img src="images/medtime-alarm.jpg" alt="MedTime dose alarm screen listing the medicines due" loading="lazy"><figcaption>Rings even on silent</figcaption></figure>
+    <figure class="mt-phone mt-mid"><img src="images/medtime-home.jpg" alt="MedTime home screen with today's medicines and a Take all button" loading="lazy"><figcaption>Today's medicines at a glance</figcaption></figure>
+    <figure class="mt-phone mt-right"><img src="images/medtime-medicine.jpg" alt="MedTime medicine page showing pills left and a Refill now button" loading="lazy"><figcaption>Supply and refills</figcaption></figure>
+  </div>
+  <div class="wrap">
+    <div class="mt-feat">
+      <div><i></i><h3>Dose reminders</h3><p>An alarm at each scheduled time, even on silent.</p></div>
+      <div><i></i><h3>Missed-dose alerts</h3><p>Invited family caregivers are told when a dose is missed.</p></div>
+      <div><i></i><h3>Refill reminders</h3><p>A heads-up before a medicine runs out.</p></div>
+      <div><i></i><h3>Health records</h3><p>Appointments, readings such as blood pressure, and dose history in one place.</p></div>
     </div>
-    <div class="cap-grid">
-      <div class="cap-item">
-        <div class="cap-mark"></div>
-        <h3>Dose reminders</h3>
-        <p>An alarm and reminder at each scheduled dose time, even on silent.</p>
-      </div>
-      <div class="cap-item">
-        <div class="cap-mark"></div>
-        <h3>Missed-dose alerts</h3>
-        <p>Invited family caregivers are told when a dose has been missed.</p>
-      </div>
-      <div class="cap-item">
-        <div class="cap-mark"></div>
-        <h3>Refill reminders</h3>
-        <p>A heads-up before a medicine runs out.</p>
-      </div>
-      <div class="cap-item">
-        <div class="cap-mark"></div>
-        <h3>Health records</h3>
-        <p>Appointments, readings such as blood pressure, and dose history in one place.</p>
-      </div>
-    </div>
-    <div class="about-text" style="max-width:760px; margin-top:32px;">
-      <h3 style="margin-bottom:8px;">Text message and WhatsApp alerts</h3>
-      <p>Alerts by text message (SMS) or WhatsApp are optional. A patient or caregiver receives them only after entering their own mobile number in the MedTime app and agreeing to receive MedTime alerts. Messages are sent only about the person's own reminders and the patients they look after: dose reminders, missed-dose alerts and refill reminders. We never send marketing messages.</p>
+    <div class="mt-sms" id="sms-alerts">
+      <p><strong>Text message and WhatsApp alerts</strong> are optional. A patient or caregiver receives them only after entering their own mobile number in the MedTime app and agreeing to receive MedTime alerts. Messages are sent only about the person's own reminders and the patients they look after: dose reminders, missed-dose alerts and refill reminders. We never send marketing messages.</p>
       <p>Message frequency varies with the medication schedule. Message and data rates may apply. Reply <strong>STOP</strong> to stop receiving messages, or <strong>HELP</strong> for help. See our <a href="privacy.html#sms">Privacy Policy</a> and <a href="terms.html#sms">SMS &amp; WhatsApp Terms</a>.</p>
     </div>
   </div>
